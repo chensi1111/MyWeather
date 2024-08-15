@@ -7,7 +7,7 @@
           v-for="item in location"
           :key="item.id"
           class="w-full cursor-pointer border-b-2 border-solid border-sky-800 py-2 text-center text-2xl font-bold hover:bg-sky-800 hover:text-white"
-          :class="{ activate: filter === item.location }"
+          :class="{ 'bg-sky-800 text-white': filter === item.location }"
           @click="changeLocation(item.location)"
         >
           {{ item.id }}
@@ -53,13 +53,13 @@
                 <div v-for="item in weekDataStore.filteredDayData(city.name)" :key="item.startTime">
                   <img
                     v-if="$route.params.id !== 'UVI'"
-                    :src="getWeatherIcon('morning', Number(item.wxUnit))"
+                    :src="getImageUrl('day', `${Number(item.wxUnit)}.svg`)"
                     :title="item.wxValue"
                     class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                   />
                   <img
                     v-if="$route.params.id === 'UVI'"
-                    :src="getWeatherIcon('morning', Number(item.UVINumber))"
+                    :src="getImageUrl('UVI', `${Number(item.UVINumber)}.png`)"
                     class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                   />
                   <div v-if="$route.params.id === 'default'" class="flex">
@@ -118,7 +118,7 @@
                   :key="item.startTime"
                 >
                   <img
-                    :src="getWeatherIcon('evening', Number(item.wxUnit))"
+                    :src="getImageUrl('night', `${Number(item.wxUnit)}.svg`)"
                     :title="item.wxValue"
                     class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                   />
@@ -168,7 +168,7 @@
           v-for="item in location"
           :key="item.id"
           class="w-1/3 cursor-pointer border-b-2 border-solid border-sky-800 py-2 text-center text-2xl font-bold hover:bg-sky-800 hover:text-white"
-          :class="{ activate: filter === item.location }"
+          :class="{ activated: filter === item.location }"
           @click="changeLocation(item.location)"
         >
           {{ item.id }}
@@ -232,13 +232,13 @@
                   >
                     <img
                       v-if="$route.params.id !== 'UVI'"
-                      :src="getWeatherIcon('morning', Number(item.wxUnit))"
+                      :src="getImageUrl('day', `${Number(item.wxUnit)}.svg`)"
                       :title="item.wxValue"
                       class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                     />
                     <img
                       v-if="$route.params.id === 'UVI'"
-                      :src="getWeatherIcon('morning', Number(item.UVINumber))"
+                      :src="getImageUrl('UVI', `${Number(item.UVINumber)}.png`)"
                       class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                     />
                     <div v-if="$route.params.id === 'default'" class="flex justify-center">
@@ -292,7 +292,7 @@
                   >
                     <img
                       v-if="$route.params.id !== 'UVI'"
-                      :src="getWeatherIcon('evening', Number(item.wxUnit))"
+                      :src="getImageUrl('night', `${Number(item.wxUnit)}.svg`)"
                       :title="item.wxValue"
                       class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                     />
@@ -390,22 +390,7 @@ const filteCitys = computed(() => {
   }
 })
 
-const route = useRoute()
-const { id } = route.params
-// 氣象圖片
-function getWeatherIcon(day: string, code: number): string {
-  const number = Number(code)
-  if (id !== 'UVI') {
-    if (day === 'morning') {
-      return new URL(`../../assets/day/${number}.svg`, import.meta.url).href
-    } else {
-      return new URL(`../../assets/night/${number}.svg`, import.meta.url).href
-    }
-  } else {
-    return new URL(`../../assets/UVI/${number}.png`, import.meta.url).href
-  }
-}
-
+const { getImageUrl } = useAssets()
 // 格式化日期
 function formatDate(time: string): [string, string] {
   const daysOfWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
@@ -417,9 +402,3 @@ function formatDate(time: string): [string, string] {
   return [`${month}-${day}`, dayOfWeek]
 }
 </script>
-
-<style lang="sass" scoped>
-.activate
-  background-color: #075985
-  color: white
-</style>

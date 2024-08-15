@@ -19,7 +19,7 @@
           <div
             class="my-3 cursor-pointer rounded-md border border-solid border-black bg-sky-300 py-1 text-center text-xs font-bold hover:bg-sky-100 sm:text-sm"
           >
-            <NuxtLink to="/week">查看全臺天氣</NuxtLink>
+            <NuxtLink to="/default">查看全臺天氣</NuxtLink>
           </div>
         </div>
         <div class="w-full sm:w-1/2">
@@ -35,7 +35,12 @@
           <div class="my-2 flex justify-center">
             <img
               v-if="weatherCodes"
-              :src="getWeatherIcon(showDayOrNight(0), weatherCodes[0].parameter.parameterValue)"
+              :src="
+                getImageUrl(
+                  showDayOrNight(0),
+                  `${Number(weatherCodes[0].parameter.parameterValue)}.svg`
+                )
+              "
               class="h-16"
             />
           </div>
@@ -72,7 +77,12 @@
           <div class="my-2 flex justify-center">
             <img
               v-if="weatherCodes"
-              :src="getWeatherIcon(showDayOrNight(1), weatherCodes[1].parameter.parameterValue)"
+              :src="
+                getImageUrl(
+                  showDayOrNight(1),
+                  `${Number(weatherCodes[1].parameter.parameterValue)}.svg`
+                )
+              "
               class="h-16"
             />
           </div>
@@ -107,7 +117,12 @@
           <div class="my-2 flex justify-center">
             <img
               v-if="weatherCodes"
-              :src="getWeatherIcon(showDayOrNight(2), weatherCodes[2].parameter.parameterValue)"
+              :src="
+                getImageUrl(
+                  showDayOrNight(2),
+                  `${Number(weatherCodes[2].parameter.parameterValue)}.svg`
+                )
+              "
               class="h-16"
             />
           </div>
@@ -142,6 +157,7 @@ const rainPerent = ref()
 const minTemp = ref()
 const maxTemp = ref()
 const comfort = ref()
+const { getImageUrl } = useAssets()
 const city = ref('Taipei')
 const cityOption = ref([
   { name: '基隆市', id: 'Keelung' },
@@ -173,15 +189,6 @@ function showDayOrNight(number: number) {
     return 'night'
   } else {
     return 'day'
-  }
-}
-
-function getWeatherIcon(day: string, code: number): string {
-  const number = Number(code)
-  if (day === 'day') {
-    return new URL(`../assets/day/${number}.svg`, import.meta.url).href
-  } else {
-    return new URL(`../assets/night/${number}.svg`, import.meta.url).href
   }
 }
 

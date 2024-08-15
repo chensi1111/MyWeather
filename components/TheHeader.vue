@@ -8,12 +8,8 @@
         <NuxtLink to="/">首頁</NuxtLink>
       </div>
       <div class="text-xl font-bold text-white hover:cursor-pointer hover:text-black lg:text-2xl">
-        <NuxtLink to="/week/default">全臺天氣預報</NuxtLink>
+        <NuxtLink to="/default">全臺天氣預報</NuxtLink>
       </div>
     </div>
   </div>
 </template>
-
-<script setup lang="ts"></script>
-
-<style lang="sass" scoped></style>

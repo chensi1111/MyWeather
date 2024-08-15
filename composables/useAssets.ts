@@ -1,9 +1,9 @@
 export default function () {
-  const images = computed(() =>
+  const images = computed<Record<string, string>>(() =>
     import.meta.glob('~/assets/images/**/*', { eager: true, import: 'default' })
   )
-  const getImageUrl = (filename: string) => {
-    const url = `/assets/images/${String(filename).replace(/^(\.\/+|\/+)/, '')}`
+  const getImageUrl = (type: string, filename: string | undefined) => {
+    const url = `/assets/images/${type}/${String(filename).replace(/^(\.\/+|\/+)/, '')}`
     return images.value?.[url]
   }
 

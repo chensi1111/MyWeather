@@ -4,5 +4,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt'],
   css: ['@fortawesome/fontawesome-free/css/all.min.css'],
-  plugins: ['~/plugins/preline.client.ts']
+  plugins: ['~/plugins/preline.client.ts'],
+  postcss: {
+    plugins: {
+      autoprefixer: {}
+    }
+  }
 })

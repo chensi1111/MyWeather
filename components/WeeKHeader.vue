@@ -5,11 +5,11 @@
     </div>
     <div class="mt-3 flex items-center justify-between">
       <div class="hidden md:flex">
-        <div class="mr-5 text-xl font-bold"><NuxtLink to="/week/default">一周預報</NuxtLink></div>
-        <div class="mr-5 text-xl font-bold"><NuxtLink to="/week/AT">體感溫度</NuxtLink></div>
-        <div class="mr-5 text-xl font-bold"><NuxtLink to="/week/CI">舒適度</NuxtLink></div>
-        <div class="mr-5 text-xl font-bold"><NuxtLink to="/week/RH">相對溼度</NuxtLink></div>
-        <div class="mr-5 text-xl font-bold"><NuxtLink to="/week/UVI">紫外線</NuxtLink></div>
+        <div class="mr-5 text-xl font-bold"><NuxtLink to="/default">一周預報</NuxtLink></div>
+        <div class="mr-5 text-xl font-bold"><NuxtLink to="/AT">體感溫度</NuxtLink></div>
+        <div class="mr-5 text-xl font-bold"><NuxtLink to="/CI">舒適度</NuxtLink></div>
+        <div class="mr-5 text-xl font-bold"><NuxtLink to="/RH">相對溼度</NuxtLink></div>
+        <div class="mr-5 text-xl font-bold"><NuxtLink to="/UVI">紫外線</NuxtLink></div>
       </div>
       <select v-model="nav" class="border-2 border-black px-1 py-[2px] text-base md:hidden">
         <option v-for="item in navs" :key="item.name" :value="item.path">{{ item.name }}</option>
@@ -33,29 +33,28 @@
 const route = useRoute()
 const router = useRouter()
 const currentPath = ref(route.path)
-
 // RWD選項
 const navs = ref([
-  { name: '一周預報', path: '/week/default' },
-  { name: '體感溫度', path: '/week/AT' },
-  { name: '紫外線', path: '/week/UVI' },
-  { name: '舒適度', path: '/week/CI' },
-  { name: '相對溼度', path: '/week/RH' }
+  { name: '一周預報', path: '/default' },
+  { name: '體感溫度', path: '/AT' },
+  { name: '紫外線', path: '/UVI' },
+  { name: '舒適度', path: '/CI' },
+  { name: '相對溼度', path: '/RH' }
 ])
 const nav = ref(currentPath.value)
 
 // 標題
 const pathTitle = computed(() => {
   switch (currentPath.value) {
-    case '/week/default':
+    case '/default':
       return '一周預報'
-    case '/week/AT':
+    case '/AT':
       return '體感溫度'
-    case '/week/UVI':
+    case '/UVI':
       return '紫外線'
-    case '/week/CI':
+    case '/CI':
       return '舒適度'
-    case '/week/RH':
+    case '/RH':
       return '相對溼度'
     default:
       return ''
@@ -82,9 +81,7 @@ function toHome() {
 }
 function toWeek() {
   router.push({
-    path: '/week/default'
+    path: '/default'
   })
 }
 </script>
-
-<style></style>
