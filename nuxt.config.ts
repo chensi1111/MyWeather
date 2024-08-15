@@ -9,5 +9,9 @@ export default defineNuxtConfig({
     plugins: {
       autoprefixer: {}
     }
+  },
+  app: {
+    baseURL: process.env.NODE_ENV === 'production' ? '/MyWeather/' : '/',
+    buildAssetsDir: '/static/'
   }
 })

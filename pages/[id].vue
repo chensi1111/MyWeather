@@ -401,4 +401,12 @@ function formatDate(time: string): [string, string] {
 
   return [`${month}-${day}`, dayOfWeek]
 }
+
+watch(filteCitys, async () => {
+  await nextTick()
+  // 重新初始化 preline 插件
+  if (window.HSStaticMethods) {
+    window.HSStaticMethods.autoInit()
+  }
+})
 </script>
