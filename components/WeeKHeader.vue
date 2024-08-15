@@ -84,4 +84,14 @@ function toWeek() {
     path: '/default'
   })
 }
+useHead({
+  meta: [
+    { name: 'description', content: `${pathTitle.value} | 氣象小幫手` },
+    { name: 'keywords', content: `${pathTitle.value}` },
+    { property: 'og:title', content: `${pathTitle.value} | 氣象小幫手` },
+    { property: 'og:description', content: pathTitle.value },
+    { property: 'og:image', content: pathTitle.value }
+  ],
+  title: `${pathTitle.value} | 氣象小幫手`
+})
 </script>

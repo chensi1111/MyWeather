@@ -1,75 +1,22 @@
-# Nuxt 3 Minimal Starter
+# 簡介
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+使用 Nuxt3所打造的氣象查詢網站，串接中央氣象局API，以Vite建立開發環境，使用TypeScript撰寫，TailwindCSS樣式，Pinia狀態管理，實現SEO搜尋引擎最佳化。
 
-## Setup
+# 技術
 
-Make sure to install the dependencies:
+- Vue3.js
+- Nuxt3
+- Vite
+- Pinia
+- RWD
+- TypeScript
+- TailwindCSS
 
-```bash
-# npm
-npm install
+# 架構
 
-# pnpm
-pnpm install
+- 首頁:地圖，36小時天氣
+- 全台天氣頁:所有縣市一周天氣，氣象類別篩選
 
-# yarn
-yarn install
+# Demo
 
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+https://chensi1111.github.io/MyWeather/
