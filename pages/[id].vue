@@ -23,12 +23,12 @@
           </div>
         </div>
         <div class="flex w-full justify-around">
-          <div v-for="item in weekDataStore.filteredDayData('臺北市')" :key="item.startTime">
+          <div v-for="item in weekDataStore.filteredDayData('臺北市')" :key="item.StartTime">
             <div class="flex items-center justify-center text-lg font-bold lg:text-xl">
-              {{ formatDate(item.startTime)[0] }}
+              {{ formatDate(item.StartTime)[0] }}
             </div>
             <div class="flex items-center justify-center text-base font-bold lg:text-base">
-              {{ formatDate(item.startTime)[1] }}
+              {{ formatDate(item.StartTime)[1] }}
             </div>
           </div>
         </div>
@@ -50,19 +50,19 @@
               <div
                 class="flex w-[calc(100%-64px)] justify-around bg-yellow-50 py-2 lg:w-[calc(100%-96px)]"
               >
-                <div v-for="item in weekDataStore.filteredDayData(city.name)" :key="item.startTime">
+                <div v-for="item in weekDataStore.filteredDayData(city.name)" :key="item.StartTime">
                   <img
-                    v-if="$route.params.id !== 'UVI'"
+                    v-if="route.params.id !== 'UVI'"
                     :src="getImageUrl('day', `${Number(item.wxUnit)}.svg`)"
                     :title="item.wxValue"
                     class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                   />
                   <img
-                    v-if="$route.params.id === 'UVI'"
+                    v-if="route.params.id === 'UVI'"
                     :src="getImageUrl('UVI', `${Number(item.UVINumber)}.png`)"
                     class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                   />
-                  <div v-if="$route.params.id === 'default'" class="flex">
+                  <div v-if="route.params.id === 'default'" class="flex">
                     <div class="w-8 text-center text-xs lg:w-12 lg:text-base">
                       {{ item.minTValue }}
                     </div>
@@ -71,7 +71,7 @@
                       {{ item.maxTValue }} °C
                     </div>
                   </div>
-                  <div v-if="$route.params.id === 'AT'" class="flex">
+                  <div v-if="route.params.id === 'AT'" class="flex">
                     <div class="w-8 text-center text-xs lg:w-12 lg:text-base">
                       {{ item.minATValue }}
                     </div>
@@ -80,7 +80,7 @@
                       {{ item.maxATValue }} °C
                     </div>
                   </div>
-                  <div v-if="$route.params.id === 'CI'" class="flex">
+                  <div v-if="route.params.id === 'CI'" class="flex">
                     <div class="w-10 text-center text-xs lg:w-12 lg:text-base">
                       {{ item.minCIValue }}
                     </div>
@@ -90,13 +90,13 @@
                     </div>
                   </div>
                   <div
-                    v-if="$route.params.id === 'RH'"
+                    v-if="route.params.id === 'RH'"
                     class="w-8 text-center text-xs lg:w-12 lg:text-base"
                   >
                     {{ item.RHValue }}%
                   </div>
                   <div
-                    v-if="$route.params.id === 'UVI'"
+                    v-if="route.params.id === 'UVI'"
                     class="w-10 text-center text-xs lg:w-12 lg:text-base"
                   >
                     {{ item.UVIValue }}
@@ -104,7 +104,7 @@
                 </div>
               </div>
             </div>
-            <div v-if="$route.params.id !== 'UVI'" class="flex">
+            <div v-if="route.params.id !== 'UVI'" class="flex">
               <div
                 class="bodr-solid-white flex w-16 items-center justify-center border bg-sky-800 text-lg font-bold text-white lg:w-24"
               >
@@ -115,14 +115,14 @@
               >
                 <div
                   v-for="item in weekDataStore.filteredNightData(city.name)"
-                  :key="item.startTime"
+                  :key="item.StartTime"
                 >
                   <img
                     :src="getImageUrl('night', `${Number(item.wxUnit)}.svg`)"
                     :title="item.wxValue"
                     class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                   />
-                  <div v-if="$route.params.id === 'default'" class="flex">
+                  <div v-if="route.params.id === 'default'" class="flex">
                     <div class="w-8 text-center text-xs lg:w-12 lg:text-base">
                       {{ item.minTValue }}
                     </div>
@@ -131,7 +131,7 @@
                       {{ item.maxTValue }} °C
                     </div>
                   </div>
-                  <div v-if="$route.params.id === 'AT'" class="flex">
+                  <div v-if="route.params.id === 'AT'" class="flex">
                     <div class="w-8 text-center text-xs lg:w-12 lg:text-base">
                       {{ item.minATValue }}
                     </div>
@@ -140,7 +140,7 @@
                       {{ item.maxATValue }} °C
                     </div>
                   </div>
-                  <div v-if="$route.params.id === 'CI'" class="flex">
+                  <div v-if="route.params.id === 'CI'" class="flex">
                     <div class="w-10 text-center text-xs lg:w-12 lg:text-base">
                       {{ item.minCIValue }}
                     </div>
@@ -150,7 +150,7 @@
                     </div>
                   </div>
                   <div
-                    v-if="$route.params.id === 'RH'"
+                    v-if="route.params.id === 'RH'"
                     class="w-8 text-center text-xs lg:w-12 lg:text-base"
                   >
                     {{ item.RHValue }}%
@@ -210,16 +210,16 @@
                 <div class="mb-2 bg-sky-800 py-1 text-center text-lg text-white">日期</div>
                 <div
                   v-for="item in weekDataStore.filteredDayData('臺北市')"
-                  :key="item.startTime"
+                  :key="item.StartTime"
                   class="mb-2"
                 >
                   <div class="flex h-6 items-center justify-center text-lg font-bold lg:text-xl">
-                    {{ formatDate(item.startTime)[0] }}
+                    {{ formatDate(item.StartTime)[0] }}
                   </div>
                   <div
                     class="flex h-6 items-center justify-center text-base font-bold lg:text-base"
                   >
-                    {{ formatDate(item.startTime)[1] }}
+                    {{ formatDate(item.StartTime)[1] }}
                   </div>
                 </div>
               </div>
@@ -228,20 +228,20 @@
                 <div>
                   <div
                     v-for="item in weekDataStore.filteredDayData(city.name)"
-                    :key="item.startTime"
+                    :key="item.StartTime"
                   >
                     <img
-                      v-if="$route.params.id !== 'UVI'"
+                      v-if="route.params.id !== 'UVI'"
                       :src="getImageUrl('day', `${Number(item.wxUnit)}.svg`)"
                       :title="item.wxValue"
                       class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                     />
                     <img
-                      v-if="$route.params.id === 'UVI'"
+                      v-if="route.params.id === 'UVI'"
                       :src="getImageUrl('UVI', `${Number(item.UVINumber)}.png`)"
                       class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                     />
-                    <div v-if="$route.params.id === 'default'" class="flex justify-center">
+                    <div v-if="route.params.id === 'default'" class="flex justify-center">
                       <div class="h-6 w-8 text-center text-xs lg:w-12 lg:text-base">
                         {{ item.minTValue }}
                       </div>
@@ -250,7 +250,7 @@
                         {{ item.maxTValue }} °C
                       </div>
                     </div>
-                    <div v-if="$route.params.id === 'AT'" class="flex justify-center">
+                    <div v-if="route.params.id === 'AT'" class="flex justify-center">
                       <div class="h-6 w-8 text-center text-xs lg:w-12 lg:text-base">
                         {{ item.minATValue }}
                       </div>
@@ -259,7 +259,7 @@
                         {{ item.maxATValue }} °C
                       </div>
                     </div>
-                    <div v-if="$route.params.id === 'CI'" class="flex justify-center">
+                    <div v-if="route.params.id === 'CI'" class="flex justify-center">
                       <div class="h-6 w-10 text-center text-xs lg:w-12 lg:text-base">
                         {{ item.minCIValue }}
                       </div>
@@ -269,13 +269,13 @@
                       </div>
                     </div>
                     <div
-                      v-if="$route.params.id === 'RH'"
+                      v-if="route.params.id === 'RH'"
                       class="m-auto h-6 w-8 text-center text-xs lg:w-12 lg:text-base"
                     >
                       {{ item.RHValue }}%
                     </div>
                     <div
-                      v-if="$route.params.id === 'UVI'"
+                      v-if="route.params.id === 'UVI'"
                       class="m-auto h-6 w-10 text-center text-xs lg:w-12 lg:text-base"
                     >
                       {{ item.UVIValue }}
@@ -288,15 +288,15 @@
                 <div>
                   <div
                     v-for="item in weekDataStore.filteredDayData(city.name)"
-                    :key="item.startTime"
+                    :key="item.StartTime"
                   >
                     <img
-                      v-if="$route.params.id !== 'UVI'"
+                      v-if="route.params.id !== 'UVI'"
                       :src="getImageUrl('night', `${Number(item.wxUnit)}.svg`)"
                       :title="item.wxValue"
                       class="m-auto h-8 w-8 lg:h-10 lg:w-10"
                     />
-                    <div v-if="$route.params.id === 'default'" class="flex justify-center">
+                    <div v-if="route.params.id === 'default'" class="flex justify-center">
                       <div class="h-6 w-8 text-center text-xs lg:w-12 lg:text-base">
                         {{ item.minTValue }}
                       </div>
@@ -305,7 +305,7 @@
                         {{ item.maxTValue }} °C
                       </div>
                     </div>
-                    <div v-if="$route.params.id === 'AT'" class="flex justify-center">
+                    <div v-if="route.params.id === 'AT'" class="flex justify-center">
                       <div class="h-6 w-8 text-center text-xs lg:w-12 lg:text-base">
                         {{ item.minATValue }}
                       </div>
@@ -314,7 +314,7 @@
                         {{ item.maxATValue }} °C
                       </div>
                     </div>
-                    <div v-if="$route.params.id === 'CI'" class="flex justify-center">
+                    <div v-if="route.params.id === 'CI'" class="flex justify-center">
                       <div class="h-6 w-10 text-center text-xs lg:w-12 lg:text-base">
                         {{ item.minCIValue }}
                       </div>
@@ -324,7 +324,7 @@
                       </div>
                     </div>
                     <div
-                      v-if="$route.params.id === 'RH'"
+                      v-if="route.params.id === 'RH'"
                       class="m-auto h-6 w-8 text-center text-xs lg:w-12 lg:text-base"
                     >
                       {{ item.RHValue }}%
@@ -341,6 +341,9 @@
 </template>
 
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 const weekDataStore = useWeekDataStore()
 // 地區
 const location = ref([
@@ -394,14 +397,13 @@ const { getImageUrl } = useAssets()
 // 格式化日期
 function formatDate(time: string): [string, string] {
   const daysOfWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
-
-  const [year, month, day] = time.split(' ')[0].split('-')
-  const date = new Date(`${year}-${month}-${day}`)
-  const dayOfWeek = daysOfWeek[date.getDay()]
+  const date = new Date(time)
+  const month = (date.getMonth() + 1).toString().padStart(2, '0') 
+  const day = date.getDate().toString().padStart(2, '0') 
+  const dayOfWeek = daysOfWeek[date.getDay()] 
 
   return [`${month}-${day}`, dayOfWeek]
 }
-
 watch(filteCitys, async () => {
   await nextTick()
   // 重新初始化 preline 插件

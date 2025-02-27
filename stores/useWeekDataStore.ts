@@ -1,7 +1,7 @@
 export const useWeekDataStore = defineStore('WeekData', () => {
   interface WeatherData {
-    startTime: string
-    endTime: string
+    StartTime: string
+    EndTime: string
     wxValue?: string
     wxUnit?: string
     minTValue?: string
@@ -17,136 +17,137 @@ export const useWeekDataStore = defineStore('WeekData', () => {
 
   const weatherData = ref()
   const weather = computed(() => {
-    return weatherData.value?.records?.locations[0]?.location || []
+    return weatherData.value?.records?.Locations[0]?.Location || []
   })
 
   const combinedData = ref<any[]>([])
 
   const updateCombinedData = () => {
+    console.log('weather.value:', weather.value)
     combinedData.value = weather.value.map(
-      (location: { weatherElement: any[]; locationName: any }) => {
-        const wxElement = location.weatherElement.find(
-          (el: { elementName: string }) => el.elementName === 'Wx'
+      (location: { WeatherElement: any[]; LocationName: any }) => {
+        const wxElement = location.WeatherElement.find(
+          (el: { ElementName: string }) => el.ElementName === "天氣現象"
         )
-        const minTElement = location.weatherElement.find(
-          (el: { elementName: string }) => el.elementName === 'MinT'
+        const minTElement = location.WeatherElement.find(
+          (el: { ElementName: string }) => el.ElementName === "最低溫度"
         )
-        const maxTElement = location.weatherElement.find(
-          (el: { elementName: string }) => el.elementName === 'MaxT'
+        const maxTElement = location.WeatherElement.find(
+          (el: { ElementName: string }) => el.ElementName === "最高溫度"
         )
-        const UVIElement = location.weatherElement.find(
-          (el: { elementName: string }) => el.elementName === 'UVI'
+        const UVIElement = location.WeatherElement.find(
+          (el: { ElementName: string }) => el.ElementName === "紫外線指數"
         )
-        const minATElement = location.weatherElement.find(
-          (el: { elementName: string }) => el.elementName === 'MinAT'
+        const minATElement = location.WeatherElement.find(
+          (el: { ElementName: string }) => el.ElementName === "最低體感溫度"
         )
-        const maxATElement = location.weatherElement.find(
-          (el: { elementName: string }) => el.elementName === 'MaxAT'
+        const maxATElement = location.WeatherElement.find(
+          (el: { ElementName: string }) => el.ElementName === "最高體感溫度"
         )
-        const minCIElement = location.weatherElement.find(
-          (el: { elementName: string }) => el.elementName === 'MinCI'
+        const minCIElement = location.WeatherElement.find(
+          (el: { ElementName: string }) => el.ElementName === "最小舒適度指數"
         )
-        const maxCIElement = location.weatherElement.find(
-          (el: { elementName: string }) => el.elementName === 'MaxCI'
+        const maxCIElement = location.WeatherElement.find(
+          (el: { ElementName: string }) => el.ElementName === "最大舒適度指數"
         )
-        const RHElement = location.weatherElement.find(
-          (el: { elementName: string }) => el.elementName === 'RH'
+        const RHElement = location.WeatherElement.find(
+          (el: { ElementName: string }) => el.ElementName === "平均相對濕度"
         )
 
         const wxData = wxElement
-          ? wxElement.time.map(
-              (t: { startTime: any; endTime: any; elementValue: { value: any }[] }) => ({
-                startTime: t.startTime,
-                endTime: t.endTime,
-                wxValue: t.elementValue[0].value,
-                wxUnit: t.elementValue[1] ? t.elementValue[1].value : null
+          ? wxElement.Time.map(
+              (t: { StartTime: any; EndTime: any; ElementValue: any }) => ({
+                StartTime: t.StartTime,
+                EndTime: t.EndTime,
+                wxValue: t.ElementValue[0].Weather,
+                wxUnit: t.ElementValue[0].WeatherCode
               })
             )
           : []
 
         const minTData = minTElement
-          ? minTElement.time.map(
-              (t: { startTime: any; endTime: any; elementValue: { value: any }[] }) => ({
-                startTime: t.startTime,
-                endTime: t.endTime,
-                minTValue: t.elementValue[0].value
+          ? minTElement.Time.map(
+              (t: { StartTime: any; EndTime: any; ElementValue: any }) => ({
+                StartTime: t.StartTime,
+                EndTime: t.EndTime,
+                minTValue: t.ElementValue[0].MinTemperature
               })
             )
           : []
 
         const maxTData = maxTElement
-          ? maxTElement.time.map(
-              (t: { startTime: any; endTime: any; elementValue: { value: any }[] }) => ({
-                startTime: t.startTime,
-                endTime: t.endTime,
-                maxTValue: t.elementValue[0].value
+          ? maxTElement.Time.map(
+              (t: { StartTime: any; EndTime: any; ElementValue: any }) => ({
+                StartTime: t.StartTime,
+                EndTime: t.EndTime,
+                maxTValue: t.ElementValue[0].MaxTemperature
               })
             )
           : []
 
         const minATData = minATElement
-          ? minATElement.time.map(
-              (t: { startTime: any; endTime: any; elementValue: { value: any }[] }) => ({
-                startTime: t.startTime,
-                endTime: t.endTime,
-                minATValue: t.elementValue[0].value
+          ? minATElement.Time.map(
+              (t: { StartTime: any; EndTime: any; ElementValue: any }) => ({
+                StartTime: t.StartTime,
+                EndTime: t.EndTime,
+                minATValue: t.ElementValue[0].MinApparentTemperature
               })
             )
           : []
 
         const maxATData = maxATElement
-          ? maxATElement.time.map(
-              (t: { startTime: any; endTime: any; elementValue: { value: any }[] }) => ({
-                startTime: t.startTime,
-                endTime: t.endTime,
-                maxATValue: t.elementValue[0].value
+          ? maxATElement.Time.map(
+              (t: { StartTime: any; EndTime: any; ElementValue: any}) => ({
+                StartTime: t.StartTime,
+                EndTime: t.EndTime,
+                maxATValue: t.ElementValue[0].MaxApparentTemperature
               })
             )
           : []
 
         const UVIData = UVIElement
-          ? UVIElement.time.map(
-              (t: { startTime: any; endTime: any; elementValue: { value: any }[] }) => ({
-                startTime: t.startTime,
-                endTime: t.endTime,
-                UVINumber: t.elementValue[0].value,
-                UVIValue: t.elementValue[1].value
+          ? UVIElement.Time.map(
+              (t: { StartTime: any; EndTime: any; ElementValue: any }) => ({
+                StartTime: t.StartTime,
+                EndTime: t.EndTime,
+                UVINumber: t.ElementValue[0].UVIndex,
+                UVIValue: t.ElementValue[0].UVExposureLevel
               })
             )
           : []
 
         const minCIData = minCIElement
-          ? minCIElement.time.map(
-              (t: { startTime: any; endTime: any; elementValue: { value: any }[] }) => ({
-                startTime: t.startTime,
-                endTime: t.endTime,
-                minCIValue: t.elementValue[1].value
+          ? minCIElement.Time.map(
+              (t: { StartTime: any; EndTime: any; ElementValue: any }) => ({
+                StartTime: t.StartTime,
+                EndTime: t.EndTime,
+                minCIValue: t.ElementValue[0].MinComfortIndexDescription
               })
             )
           : []
 
         const maxCIData = maxCIElement
-          ? maxCIElement.time.map(
-              (t: { startTime: any; endTime: any; elementValue: { value: any }[] }) => ({
-                startTime: t.startTime,
-                endTime: t.endTime,
-                maxCIValue: t.elementValue[1].value
+          ? maxCIElement.Time.map(
+              (t: { StartTime: any; EndTime: any; ElementValue: any }) => ({
+                StartTime: t.StartTime,
+                EndTime: t.EndTime,
+                maxCIValue: t.ElementValue[0].MaxComfortIndexDescription
               })
             )
           : []
 
         const RHData = RHElement
-          ? RHElement.time.map(
-              (t: { startTime: any; endTime: any; elementValue: { value: any }[] }) => ({
-                startTime: t.startTime,
-                endTime: t.endTime,
-                RHValue: t.elementValue[0].value
+          ? RHElement.Time.map(
+              (t: { StartTime: any; EndTime: any; ElementValue: any }) => ({
+                StartTime: t.StartTime,
+                EndTime: t.EndTime,
+                RHValue: t.ElementValue[0].RelativeHumidity
               })
             )
           : []
         // 合併資料
         return {
-          locationName: location.locationName,
+          LocationName: location.LocationName,
           wxData,
           minTData,
           maxTData,
@@ -164,9 +165,9 @@ export const useWeekDataStore = defineStore('WeekData', () => {
   // 時間範圍
   const filterDataByTimeOfDay = (data: any[], timeOfDay: 'morning' | 'evening') => {
     return data.filter((item) => {
-      const startTime = new Date(item.startTime)
-      const hour = startTime.getHours()
-      if (startTime.getHours() === 0) {
+      const StartTime = new Date(item.StartTime)
+      const hour = StartTime.getHours()
+      if (StartTime.getHours() === 0) {
         return false
       }
       if (timeOfDay === 'morning') {
@@ -180,7 +181,7 @@ export const useWeekDataStore = defineStore('WeekData', () => {
   // 分類白天
   const filteredDayData = (cityName: string): WeatherData[] => {
     const cityData = combinedData.value.find(
-      (data: { locationName: string }) => data.locationName === cityName
+      (data: { LocationName: string }) => data.LocationName === cityName
     )
 
     if (!cityData) return []
@@ -211,7 +212,7 @@ export const useWeekDataStore = defineStore('WeekData', () => {
   // 分類晚上
   const filteredNightData = (cityName: string): WeatherData[] => {
     const cityData = combinedData.value.find(
-      (data: { locationName: string }) => data.locationName === cityName
+      (data: { LocationName: string }) => data.LocationName === cityName
     )
 
     if (!cityData) return []
@@ -251,18 +252,18 @@ export const useWeekDataStore = defineStore('WeekData', () => {
     UVIData: any[]
   ) => {
     return wxData.map((wxItem) => {
-      const minTItem = minTData.find((item) => item.startTime === wxItem.startTime)
-      const maxTItem = maxTData.find((item) => item.startTime === wxItem.startTime)
-      const minCIItem = minCIData.find((item) => item.startTime === wxItem.startTime)
-      const maxCIItem = maxCIData.find((item) => item.startTime === wxItem.startTime)
-      const RHItem = RHData.find((item) => item.startTime === wxItem.startTime)
-      const minATItem = minATData.find((item) => item.startTime === wxItem.startTime)
-      const maxATItem = maxATData.find((item) => item.startTime === wxItem.startTime)
-      const UVIItem = UVIData.find((item) => item.startTime === wxItem.startTime)
+      const minTItem = minTData.find((item) => item.StartTime === wxItem.StartTime)
+      const maxTItem = maxTData.find((item) => item.StartTime === wxItem.StartTime)
+      const minCIItem = minCIData.find((item) => item.StartTime === wxItem.StartTime)
+      const maxCIItem = maxCIData.find((item) => item.StartTime === wxItem.StartTime)
+      const RHItem = RHData.find((item) => item.StartTime === wxItem.StartTime)
+      const minATItem = minATData.find((item) => item.StartTime === wxItem.StartTime)
+      const maxATItem = maxATData.find((item) => item.StartTime === wxItem.StartTime)
+      const UVIItem = UVIData.find((item) => item.StartTime === wxItem.StartTime)
 
       return {
-        startTime: wxItem.startTime,
-        endTime: wxItem.endTime,
+        StartTime: wxItem.StartTime,
+        EndTime: wxItem.EndTime,
         wxUnit: wxItem.wxUnit,
         wxValue: wxItem.wxValue,
         minTValue: minTItem ? minTItem.minTValue : 'N/A',
@@ -278,7 +279,7 @@ export const useWeekDataStore = defineStore('WeekData', () => {
     })
   }
   watch(weather, (newWeather) => {
-    if (newWeather.length > 0) {
+    if (newWeather) {
       updateCombinedData()
     }
   })
